@@ -1,56 +1,51 @@
 from flask import Flask, request
 from youtube_transcript_api import YouTubeTranscriptApi
 from transformers import pipeline
-import nltk
-
-# Install additional requirements (optional):
-# pip install tqdm
+import requests
+from bs4 import BeautifulSoup
 
 app = Flask(__name__)
+summarizer = pipeline('summarization')
 
 @app.get('/summary')
 def summary_api():
     url = request.args.get('url', '')
     video_id = url.split('=')[1]
-
-    # Optionally use tqdm for progress bar (requires tqdm installation)
-    # from tqdm import tqdm
-
-    summary = ""
-    sentences = get_transcript(video_id)
-
-    # Splitting based on sentences improves context
-    summarizer = pipeline("summarization", model="t5-small")  # Smaller model alternative
-
-    # Consider pre-processing to reduce transcript length (optional)
-    # preprocessed_sentences = preprocess_transcript(sentences)
-
-    # Summarize sentences while keeping context with sliding window
-    window_size = 5  # Adjust window size based on model capabilities and desired summary length
-    for i in range(0, len(sentences), window_size):
-        window = sentences[i:i + window_size]
-        window_summary = summarizer(window)[0]["summary_text"]
-        summary += window_summary + " "
-
-        # Optional progress bar using tqdm (requires installation)
-        # print(f"Summarized {i // window_size + 1} out of {len(sentences) // window_size + 1} windows")
-
+    transcript = get_transcript(video_id)
+    summary = get_summary(transcript)
     return summary, 200
 
+@app.get('/article')
+def article_api():
+    url = request.args.get('url', '')
+    article_text = scrape_article(url)
+    summary = get_summary(article_text)
+    return summary, 200
 
 def get_transcript(video_id):
     transcript_list = YouTubeTranscriptApi.get_transcript(video_id)
-    transcript = " ".join([d["text"] for d in transcript_list])
-    sentences = nltk.sent_tokenize(transcript)
-    return sentences
+    transcript = ' '.join([d['text'] for d in transcript_list])
+    return transcript
 
+def scrape_article(url):
+    # Scrape article data from URL
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'html.parser')
+    article_text = ' '.join([p.get_text() for p in soup.find_all('p')])
+    return article_text
 
-# Optional pre-processing function (example)
-def preprocess_transcript(sentences):
-    # Implement your pre-processing logic here (e.g., remove greetings, simplify sentences)
-    # Replace with your pre-processing code
-    return sentences
+def get_summary(text):
+    # Split text into smaller chunks
+    chunk_size = 500  # You can adjust the chunk size as needed
+    chunks = [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
+    
+    # Generate summary for each chunk
+    summary = ''
+    for chunk in chunks:
+        summary_text = summarizer(chunk)[0]['summary_text']
+        summary += summary_text + ' '
+    
+    return summary
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run()

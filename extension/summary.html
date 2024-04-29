@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* CSS styles for light saffron theme */
+        body {
+            background-color: #fef5e7; /* Light saffron background */
+            color: #333; /* Dark gray text color */
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+        }
+        
+        .container {
+            background-color: #fff; /* White container background */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .inner-container {
+            background-color: #f9f9f9; /* Light shade for inner container */
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        h1 {
+            color: #ff6b6b; /* Light coral heading color */
+            text-align: center;
+        }
+        
+        #summary {
+            color: #555; /* Medium gray text color */
+            white-space: pre-wrap; /* Allow line breaks within paragraphs */
+            word-wrap: break-word; /* Break long words */
+        }
+
+        .download-btn {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container max-w-2xl mx-auto p-8">
+        <div class="rounded-lg border bg-card text-card-foreground shadow-xl" data-v0-t="card">
+            <div class="flex flex-col space-y-1.5 p-6 bg-gradient-to-r from-[#6dd5ed] to-[#2193b0] text-white text-center">
+                <h1 class="whitespace-nowrap tracking-tight text-2xl font-bold">Summary</h1>
+            </div>
+            <br>
+            <div class="bg-white p-6 text-gray-700">
+                <p id="summary"></p>
+            </div>
+            <div class="download-btn">
+                <button id="downloadBtn">Download Summary as PDF</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="popup.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <script src="pdf.js"></script>
+</body>
+</html>

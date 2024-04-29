@@ -1,27 +1,24 @@
 {
-    "manifest_version": 3,
-    "name": "Youtube Summarizer",
-    "version": "1.0",
-    "description": "An extension to summarize youtube videos using the transcript",
-    "permissions": [
-      "activeTab",
-      "declarativeContent"
-    ],
-    "host_permissions" : ["http://127.0.0.1:5000/*"],
-    "action": {
-      "default_title": "Summarise this video",
-      "default_icon": {
-        "16": "images/youtube.png",
-        "32": "images/youtube.png",
-        "48": "images/youtube.png",
-        "128": "images/youtube.png"
-      },
-      "default_popup": "popup.html"
+  "manifest_version": 3,
+  "name": "Youtube Summarizer",
+  "version": "1.0",
+  "description": "An extension to summarize youtube videos using the transcript",
+  "permissions": ["activeTab", "declarativeContent"],
+  "host_permissions": ["http://127.0.0.1:5000/*"],
+  "action": {
+    "default_title": "Summarise this video",
+    "default_icon": {
+      "16": "images/sumz.png",
+      "32": "images/sumz.png",
+      "48": "images/sumz.png",
+      "128": "images/sumz.png"
     },
-    "icons": {
-      "16": "images/youtube.png",
-        "32": "images/youtube.png",
-        "48": "images/youtube.png",
-        "128": "images/youtube.png"
-    }
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "images/sumz.png",
+    "32": "images/sumz.png",
+    "48": "images/sumz.png",
+    "128": "images/sumz.png"
+  }
 }

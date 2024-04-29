@@ -1,68 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Summarizer</title>
+    <title>Youtube Transcript Summariser</title>
     <style>
-        body {
-            font-family: sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        .popup {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 20px;
+        h1 {
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 0.3s ease-in-out;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            margin-bottom: 20px;
         }
-
-        @keyframes fadeIn {
-            from {opacity: 0;}
-            to {opacity: 1;}
+        body {
+            width: max-content;
+            max-width: 800px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #555;
+            margin: auto;
+            padding: 20px;
+            background-color: #f9f9f9;
         }
-
-        .heading {
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-
-        .btn {
-            background-color: #4CAF50;
+        button {
+            background-color: #ff5252;
             color: white;
-            padding: 10px 20px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 18px;
+            margin: 20px auto 10px auto;
+            display: block;
             cursor: pointer;
-            transition: background-color 0.2s ease-in-out;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-
-        .btn:hover {
-            background-color: #3e8e41;
+        button:hover {
+            background-color: #ff6b6b;
         }
-
-        #output {
-            width: 75%; /* Adjust the width as per your requirement */
-            margin: 0 auto; /* Center the paragraph horizontally */
-            text-align: left; /* Align the text to the left */
-            overflow-wrap: break-word; /* Wrap long words to the next line */
+        button[disabled] {
+            background-color: #ff7f7f;
+            cursor: not-allowed;
         }
-        
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: justify;
+        }
     </style>
 </head>
 <body>
-    <div class="popup">
-        <h1 class="heading">YouTube Summarizer</h1>
-        <button id="summarize" class="btn" type="button">Summarize</button>
-        <p id="output"></p>
-        <script src="popup.js"></script>
-    </div>
+    <h1><br> Summz Summarize</h1>
+    <button id="summarise" type="button">Summarise</button>
+    <p id="output"></p>
+    <script src="popup.js"></script>
 </body>
 </html>
